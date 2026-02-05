@@ -1,0 +1,59 @@
+Table,Column,Type,Nullable,Default Value,Key / Relation
+category_summaries,id,uuid,NOT NULL,gen_random_uuid(),🔑 PK
+category_summaries,category,text,NOT NULL,null,
+category_summaries,summary,text,NOT NULL,null,
+category_summaries,generated_at,timestamp with time zone,NULL,now(),
+category_summaries,gender,text,NULL,null,
+complaints,id,uuid,NOT NULL,gen_random_uuid(),🔑 PK
+complaints,user_id,uuid,NOT NULL,null,🔗 FK -> students.id
+complaints,category,text,NOT NULL,null,
+complaints,severity,text,NOT NULL,null,
+complaints,description,text,NULL,null,
+complaints,status,text,NULL,"'submitted, acknowledged, resolved'::text",
+complaints,submitted_at,timestamp with time zone,NULL,now(),
+complaints,acknowledged_at,timestamp with time zone,NULL,null,
+complaints,resolved_at,timestamp with time zone,NULL,null,
+complaints,closing_note,text,NULL,null,
+complaints,resolved_by_id,uuid,NULL,null,🔗 FK -> staff.id
+complaints,acknowledged_by_id,uuid,NULL,null,🔗 FK -> staff.id
+complaints,resolved_by,uuid,NULL,null,🔗 FK -> staff.id
+complaints,resolved_by,uuid,NULL,null,null
+complaints,acknowledged_by,uuid,NULL,null,null
+complaints,acknowledged_by,uuid,NULL,null,🔗 FK -> staff.id
+outing_requests,id,uuid,NOT NULL,gen_random_uuid(),🔑 PK
+outing_requests,created_at,timestamp with time zone,NULL,now(),
+outing_requests,submitted_at,timestamp with time zone,NULL,now(),
+outing_requests,return_time,timestamp with time zone,NULL,null,
+outing_requests,purpose,text,NOT NULL,null,
+outing_requests,status,text,NOT NULL,'Submitted'::text,
+outing_requests,user_id,uuid,NOT NULL,null,🔗 FK -> students.id
+outing_requests,user_id,uuid,NOT NULL,null,🔗 FK -> students.id
+outing_requests,approved_by,uuid,NULL,null,🔗 FK -> staff.id
+outing_requests,approved_by,uuid,NULL,null,🔗 FK -> staff.id
+outing_requests,out_time,timestamp with time zone,NULL,now(),
+outing_requests,rejection_reason,text,NULL,null,
+outing_requests,return_date,timestamp with time zone,NULL,null,
+outing_requests,updated_at,timestamp with time zone,NULL,null,
+staff,id,uuid,NOT NULL,null,🔑 PK
+staff,name,text,NOT NULL,null,
+staff,email,text,NULL,null,
+staff,phone,text,NULL,null,
+staff,gender,text,NULL,null,
+staff,designation,text,NOT NULL,null,
+staff,is_approved,boolean,NULL,false,
+staff,is_deleted,boolean,NULL,false,
+staff,created_at,timestamp with time zone,NULL,now(),
+students,id,uuid,NOT NULL,null,🔑 PK
+students,name,text,NOT NULL,null,
+students,email,text,NULL,null,
+students,phone,text,NULL,null,
+students,gender,text,NULL,null,
+students,roll_no,text,NOT NULL,null,
+students,year,text,NULL,null,
+students,course,text,NULL,null,
+students,parent_phone,text,NULL,null,
+students,room_number,text,NULL,null,
+students,is_approved,boolean,NULL,false,
+students,is_deleted,boolean,NULL,false,
+students,pending_update,json,NULL,null,
+students,created_at,timestamp with time zone,NULL,now(),

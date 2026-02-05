@@ -1,0 +1,45 @@
+Table Name,RLS Status,Policy Name,Action,Target Roles,USING (Filter Condition),WITH CHECK (Validation)
+category_summaries,✅ Enabled,Staff Delete Summaries,DELETE (Remove),public (Everyone),"(EXISTS ( SELECT 1
+   FROM staff
+  WHERE ((staff.id = auth.uid()) AND (staff.is_approved = true))))",---
+category_summaries,✅ Enabled,Staff View Summaries,SELECT (Read),public (Everyone),"(EXISTS ( SELECT 1
+   FROM staff
+  WHERE ((staff.id = auth.uid()) AND (staff.is_approved = true))))",---
+complaints,✅ Enabled,Create Complaints,INSERT (Create),public (Everyone),---,"((auth.uid() = user_id) AND (EXISTS ( SELECT 1
+   FROM students
+  WHERE ((students.id = auth.uid()) AND (students.is_approved = true)))))"
+complaints,✅ Enabled,Staff Update Complaints,UPDATE (Edit),public (Everyone),"(EXISTS ( SELECT 1
+   FROM staff
+  WHERE ((staff.id = auth.uid()) AND (staff.is_approved = true))))",---
+complaints,✅ Enabled,Staff view all complaints,SELECT (Read),authenticated,"(EXISTS ( SELECT 1
+   FROM staff
+  WHERE (staff.id = auth.uid())))",---
+complaints,✅ Enabled,Students create complaints,INSERT (Create),public (Everyone),---,(auth.uid() = user_id)
+complaints,✅ Enabled,Students view own complaints,SELECT (Read),public (Everyone),(auth.uid() = user_id),---
+outing_requests,✅ Enabled,Create Outings,INSERT (Create),public (Everyone),---,"((auth.uid() = user_id) AND (EXISTS ( SELECT 1
+   FROM students
+  WHERE ((students.id = auth.uid()) AND (students.is_approved = true)))))"
+outing_requests,✅ Enabled,Staff Update Outings,UPDATE (Edit),public (Everyone),"(EXISTS ( SELECT 1
+   FROM staff
+  WHERE ((staff.id = auth.uid()) AND (staff.is_approved = true))))",---
+outing_requests,✅ Enabled,Staff view all outings,SELECT (Read),public (Everyone),"(EXISTS ( SELECT 1
+   FROM staff
+  WHERE (staff.id = auth.uid())))",---
+outing_requests,✅ Enabled,Students create outings,INSERT (Create),public (Everyone),---,(auth.uid() = user_id)
+outing_requests,✅ Enabled,Students view own outings,SELECT (Read),public (Everyone),(auth.uid() = user_id),---
+outing_requests,✅ Enabled,View Outings,SELECT (Read),public (Everyone),"((auth.uid() = user_id) OR (EXISTS ( SELECT 1
+   FROM staff
+  WHERE ((staff.id = auth.uid()) AND (staff.is_approved = true)))))",---
+staff,✅ Enabled,Enable insert for authenticated users,INSERT (Create),public (Everyone),---,(auth.role() = 'authenticated'::text)
+staff,✅ Enabled,Enable read access for all users,SELECT (Read),public (Everyone),true,---
+staff,✅ Enabled,Public Read Staff,SELECT (Read),public (Everyone),(auth.role() = 'authenticated'::text),---
+staff,✅ Enabled,Staff Update Self or Admin,UPDATE (Edit),public (Everyone),"((auth.uid() = id) OR (EXISTS ( SELECT 1
+   FROM staff staff_1
+  WHERE ((staff_1.id = auth.uid()) AND (staff_1.is_approved = true)))))",---
+staff,✅ Enabled,Staff can create own profile,INSERT (Create),authenticated,---,(auth.uid() = id)
+staff,✅ Enabled,Staff can view own profile,SELECT (Read),authenticated,(auth.uid() = id),---
+students,✅ Enabled,Staff Manage Students,ALL (Full Access),public (Everyone),"(EXISTS ( SELECT 1
+   FROM staff
+  WHERE ((staff.id = auth.uid()) AND (staff.is_approved = true))))",---
+students,✅ Enabled,Student Update Self,UPDATE (Edit),public (Everyone),(auth.uid() = id),---
+students,✅ Enabled,Student View Self,SELECT (Read),public (Everyone),(auth.uid() = id),---

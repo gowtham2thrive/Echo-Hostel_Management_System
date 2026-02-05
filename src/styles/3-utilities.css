@@ -1,0 +1,78 @@
+/* ==========================================================================
+   3. LAYOUT & UTILITIES
+   ========================================================================== */
+
+.container { max-width: 1000px; margin: 0 auto; padding: 1.5rem; padding-bottom: 2rem; }
+.content-wrapper { min-height: 80vh; }
+
+/* Flexbox Utilities */
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.gap-6 { gap: 6px; }
+.gap-10 { gap: 10px; }
+
+/* Grid Utilities */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.grid-3-custom { display: grid; grid-template-columns: 1fr 1fr 1.5fr; gap: 10px; }
+
+/* Spacing Utilities */
+.m-0 { margin: 0; }
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1.5rem; }
+.mb-5 { margin-bottom: 2.5rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-5 { margin-top: 3rem; }
+.mt-auto { margin-top: auto; }
+.pb-2 { padding-bottom: 0.5rem; }
+.pb-05 { padding-bottom: 0.5rem; }
+.w-100 { width: 100%; }
+
+/* Typography */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-muted { color: var(--text-muted); }
+.text-main { color: var(--text-main); }
+.text-primary { color: var(--primary); }
+.text-success { color: var(--success); }
+.text-danger { color: var(--danger); }
+.text-sm { font-size: 0.9rem; }
+.text-xl { font-size: 1.5rem; }
+.font-bold { font-weight: 600; }
+.font-normal { font-weight: 400; }
+.italic { font-style: italic; }
+
+.relative { position: relative; }
+.z-2000 { z-index: 2000; }
+.pointer { cursor: pointer; }
+
+/* ==========================================================================
+   GLOBAL GRID SYSTEM & RESPONSIVENESS
+   ========================================================================== */
+
+/* Default: 2 Columns side-by-side */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px; /* Consistent gap */
+}
+
+/* Default: 3 Columns */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+/* Stack grids vertically on Mobile */
+@media (max-width: 768px) {
+  .grid-2, 
+  .grid-3 {
+    grid-template-columns: 1fr !important; /* Force single column */
+    gap: 12px;
+  }
+}

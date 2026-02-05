@@ -1,0 +1,66 @@
+/* ==========================================================================
+   2. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+
+/* 🔒 Global Asset Protection */
+img {
+  pointer-events: none;         /* Disables Right-Click & "Save As" */
+  user-select: none;            /* Prevents blue highlight selection */
+  -webkit-user-drag: none;      /* Prevents dragging file to desktop */
+  -webkit-user-select: none;    /* Safari/Chrome selection fix */
+  -moz-user-select: none;       /* Firefox selection fix */
+  -ms-user-select: none;        /* IE/Edge selection fix */
+  -webkit-touch-callout: none;  /* Disables iOS Long-Press Menu */
+}
+
+/* Allow interaction for specific images (e.g., avatars) */
+img.interactive {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* 🚀 Fix mobile tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  background-color: var(--bg-deep);
+  transition: background-color 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  min-height: 100vh;
+  background: transparent;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection in inputs */
+input, textarea, [contenteditable] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Background Gradient Layer */
+body::before {
+  content: "";
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--bg-gradient);
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#root { width: 100%; margin: 0; padding: 0; }

@@ -1,0 +1,281 @@
+/* ==========================================================================
+   4. GLASS COMPONENTS (Base)
+   ========================================================================== */
+
+/* --- Header --- */
+.glass-header {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+.student-header { border-bottom: none; margin-bottom: 1rem; padding-bottom: 0; }
+
+.app-title {
+  margin: 0; font-size: 1.4rem; letter-spacing: -0.5px; 
+  line-height: 1; font-weight: 700;
+}
+.student-header .app-title { font-size: 1.8rem; }
+
+/* --- Toolbar --- */
+.glass-toolbar {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 10px;
+  background: var(--glass-surface);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px; padding: 8px 12px;
+  margin-bottom: 1.5rem; width: 100%; 
+}
+
+.toolbar-title {
+  margin: 0; font-size: 1rem; font-weight: 700;
+  color: var(--text-main); display: flex; align-items: center; gap: 8px;
+  white-space: nowrap;
+}
+
+.toolbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.toolbar-divider { width: 1px; height: 24px; background: var(--glass-border); margin: 0 4px; }
+
+/* --- Cards (Base) --- */
+.glass-card {
+  background: var(--glass-surface); 
+  backdrop-filter: blur(var(--blur-amt)); -webkit-backdrop-filter: blur(var(--blur-amt));
+  border: 1px solid var(--glass-border); 
+  border-radius: 16px; padding: 1.5rem;
+  box-shadow: var(--glass-shadow); 
+  transition: all 0.3s ease;
+}
+
+/* Tinted Cards for Status */
+.glass-card.status-resolved, .glass-card.status-completed {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+.glass-card.status-acknowledged, .glass-card.status-approved {
+  background: rgba(59, 130, 246, 0.15) !important;
+  border-color: rgba(59, 130, 246, 0.3) !important;
+}
+.glass-card.status-rejected {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+/* ==========================================================================
+   5. INPUTS, BUTTONS & FORMS
+   ========================================================================== */
+
+/* Inputs & Selects */
+input, textarea {
+  width: 100%; background: var(--input-bg); border: 1px solid var(--glass-border);
+  color: var(--text-main); padding: 12px; border-radius: 8px; margin-bottom: 1rem;
+  font-size: 1rem; outline: none; transition: all 0.2s;
+}
+input:focus, select:focus, textarea:focus { 
+  border-color: var(--primary) !important; background: var(--input-focus); 
+  box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2); 
+}
+
+select, .filter-select {
+  width: 100%; appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat; background-position: right 1rem center; background-size: 0.65em auto;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid var(--glass-border) !important; color: var(--text-main);
+  padding: 8px 12px; border-radius: 12px; margin-bottom: 1rem; font-size: 0.9rem;
+  outline: none;
+}
+.glass-toolbar .filter-select { margin-bottom: 0 !important; font-size: 0.8rem; padding: 6px 10px; height: auto; }
+option { background-color: var(--bg-deep); color: var(--text-main); }
+
+/* Date Picker Fixes */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); opacity: 0.8; cursor: pointer; transition: opacity 0.2s ease;
+}
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+html.light input[type="date"]::-webkit-calendar-picker-indicator,
+html.light input[type="datetime-local"]::-webkit-calendar-picker-indicator { filter: none; opacity: 0.6; }
+
+/* Buttons */
+button {
+  cursor: pointer; background: var(--primary); color: white; border: none;
+  padding: 12px 24px; border-radius: 8px; font-weight: 600; transition: all 0.2s;
+  text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85rem;
+  max-width: 100%; white-space: normal; word-break: break-word;
+}
+button:active { transform: scale(0.98); }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Button Variants */
+button.secondary { background: var(--glass-surface); border: 1px solid var(--glass-border); color: var(--text-main); }
+button.danger { background: var(--danger); color: white; }
+button.success { background: var(--success); color: white; }
+
+.btn-slide {
+  position: relative; overflow: hidden; background: transparent; color: var(--primary);
+  border: 1px solid var(--glass-border); z-index: 1;
+}
+.btn-slide::before {
+  content: ""; position: absolute; top: 0; left: 0; width: 0%; height: 100%;
+  background: var(--primary); z-index: -1; transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.btn-slide:hover { color: white; border-color: var(--primary); }
+.btn-slide:hover::before { width: 100%; }
+
+/* Mini Buttons */
+.mini-btn { font-size: 0.75rem !important; padding: 6px 12px !important; border-radius: 8px; border: 1px solid transparent; background: transparent; }
+.mini-btn.ack { background: rgba(59, 130, 246, 0.1); color: var(--info); }
+.mini-btn.resolve { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+.mini-pill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px; 
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+  min-height: 36px;
+}
+.mini-pill-btn.muted {
+  background: transparent;
+  border-color: var(--glass-border);
+  color: var(--text-muted);
+}
+.mini-pill-btn.muted:hover {
+  background: rgba(255,255,255,0.1);
+  color: var(--text-main);
+  border-color: var(--text-muted);
+}
+.mini-pill-btn.success {
+  background-color: var(--success); 
+  color: #ffffff !important; 
+  border-color: var(--success);
+}
+.mini-pill-btn.success:hover {
+  background-color: #059669; 
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+.mini-pill-btn.danger { border: 1px solid var(--danger); color: var(--danger); }
+.mini-pill-btn.danger:hover { background: rgba(239, 68, 68, 0.15); }
+
+/* Select All Checkbox */
+.select-all-wrapper {
+  display: flex; align-items: center; gap: 6px; cursor: pointer;
+  padding: 4px 8px; border-radius: 8px; transition: background 0.2s;
+}
+.select-all-wrapper:hover { background: var(--glass-highlight); }
+
+/* Circle Icon Button */
+.icon-btn-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--primary);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.icon-btn-circle:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.icon-btn-circle.active {
+  background: var(--text-main);
+  color: var(--bg-body);
+}
+
+/* ==========================================================================
+   6. BADGES & STATUS
+   ========================================================================== */
+
+.badge {
+  padding: 6px 14px; border-radius: 30px; 
+  font-size: 0.65rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 1px;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.badge.pending, .badge.submitted { color: #fff; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+.badge.submitted::before, .badge.pending::before { content: "●"; font-size: 1.2em; margin-top: -2px; }
+
+.badge.resolved, .badge.completed { color: #fff; background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+
+.badge.acknowledged, .badge.approved { color: #fff; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+
+.badge.rejected, .badge.critical { color: #fff; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+.badge-count {
+  font-size: 0.75rem; font-weight: 800; padding: 2px 8px;
+  border-radius: 12px; color: #fff; min-width: 24px; text-align: center;
+  background: var(--text-muted); border: 1px solid rgba(255,255,255,0.1);
+}
+.col-name.text-danger + .badge-count { background: var(--danger); }
+
+/* --- Portal Badge --- */
+.portal-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.7rem; font-weight: 700; color: var(--primary);
+  background: rgba(var(--primary-rgb), 0.1);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+  padding: 4px 10px; border-radius: 20px;
+  margin-top: 6px; letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.portal-badge::before {
+  content: ""; display: block; width: 6px; height: 6px;
+  background: var(--primary); border-radius: 50%;
+}
+.portal-badge:hover {
+  background: rgba(var(--primary-rgb), 0.15);
+  transform: translateY(-1px);
+}
+/* ==========================================================================
+   7. SKELETON LOADING ANIMATION
+   ========================================================================== */
+
+   /* --- SHIMMER ANIMATION --- */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: #e2e8f0; /* Light mode base */
+  background-image: linear-gradient(
+    90deg, 
+    #e2e8f0 0px, 
+    #f1f5f9 40px, 
+    #e2e8f0 80px
+  ); 
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* Dark Mode Overrides */
+[data-theme='dark'] .skeleton {
+  background: #1e293b;
+  background-image: linear-gradient(
+    90deg, 
+    #1e293b 0px, 
+    #334155 40px, 
+    #1e293b 80px
+  );
+}

@@ -1,0 +1,426 @@
+/* =========================================
+   💎 GLASS DROPDOWN SYSTEM
+   ========================================= */
+
+/* TRIGGER */
+.glass-dropdown-trigger {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  gap: 12px;
+
+  /* Glass Styling */
+  background: var(--trigger-bg);
+  border: 1px solid var(--trigger-border);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  
+  /* Text */
+  color: var(--text-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+  
+  /* Behavior */
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.glass-dropdown-trigger:hover {
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
+.glass-dropdown-trigger.active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
+}
+
+.glass-dropdown-trigger.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+/* MENU */
+.glass-dropdown-menu {
+  /* Colors & Glass Effect */
+  background: var(--dropdown-bg);
+  backdrop-filter: blur(25px);         
+  -webkit-backdrop-filter: blur(25px);
+  
+  /* Border & Shape */
+  border: 1px solid var(--dropdown-border);
+  border-radius: 14px;
+  box-shadow: var(--dropdown-shadow);
+  
+  /* Layout */
+  padding: 6px;
+  overflow-y: auto;
+  
+  /* 🚀 ANIMATION LOGIC */
+  opacity: 0;
+  animation: dropdownPop 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dropdownPop {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.95) translateY(0); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
+
+/* MENU ITEMS */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 2px;
+  
+  border-radius: 8px;
+  color: var(--text-dropdown);
+  font-size: 0.9rem;
+  font-weight: 500;
+  
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dropdown-item:hover {
+  background: var(--item-hover);
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+.dropdown-item.selected {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb), 0.4);
+}
+
+/* ICONS & SCROLLBAR */
+.dropdown-arrow {
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+  opacity: 0.7;
+}
+
+.dropdown-arrow.rotate {
+  transform: rotate(180deg);
+  color: var(--primary);
+  opacity: 1;
+}
+
+.glass-dropdown-menu::-webkit-scrollbar { width: 5px; }
+.glass-dropdown-menu::-webkit-scrollbar-track { background: transparent; }
+.glass-dropdown-menu::-webkit-scrollbar-thumb { 
+  background: var(--dropdown-border); 
+  border-radius: 10px; 
+}
+
+/* Dropdown Wrapper */
+.glass-dropdown-container { position: relative; z-index: auto; }
+
+
+/* =========================================
+   GLASS DATE & TIME PICKER
+   ========================================= */
+
+/* --- Shared Popup Container --- */
+.calendar-popup,
+.time-popup {
+  position: absolute;
+  left: 0;
+  top: auto; 
+  bottom: calc(100% + 8px); 
+  background: var(--glass-dropdown);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  z-index: 9999; 
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Animations */
+.animate-slide-up { 
+  transform-origin: bottom center;
+  animation: fadeSlideUp 0.2s ease-out forwards; 
+}
+.animate-slide-down { 
+  transform-origin: top center;
+  animation: fadeSlideDown 0.2s ease-out forwards; 
+}
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* DATE PICKER STYLES */
+.calendar-popup {
+  width: 280px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 290px;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.calendar-title-btn {
+  background: transparent; border: none; font-weight: 700; color: var(--text-main);
+  font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 4px;
+  padding: 4px 8px; border-radius: 6px;
+}
+.calendar-title-btn:hover { background: rgba(255, 255, 255, 0.1); }
+
+.calendar-nav-btn {
+  background: transparent; border: none; color: var(--text-muted); cursor: pointer;
+  padding: 4px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+}
+.calendar-nav-btn:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-main); }
+
+.calendar-grid-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.grid-header-item {
+  text-align: center; font-size: 0.7rem; font-weight: 700; color: var(--text-muted);
+  opacity: 0.8; margin-bottom: 4px;
+}
+
+.calendar-cell {
+  display: flex; align-items: center; justify-content: center; border-radius: 6px;
+  border: none; background: transparent; color: var(--text-main); cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap !important;
+  flex-direction: row !important;
+  width: 100%;
+  padding: 0;
+}
+
+.calendar-cell.day { height: 28px; font-size: 0.85rem; } 
+.calendar-grid-months, .calendar-grid-years {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 4px 0;
+}
+.calendar-cell.month, .calendar-cell.year { height: 36px; font-size: 0.85rem; }
+
+.calendar-cell:hover:not(.disabled):not(.selected) {
+  background: rgba(255, 255, 255, 0.1); border: 1px solid var(--glass-border);
+}
+
+.calendar-cell.selected {
+  background-color: var(--primary) !important; color: white !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); font-weight: 700;
+}
+.calendar-cell.today { color: var(--primary); font-weight: 700; border: 1px dashed var(--primary); }
+.calendar-cell.disabled { opacity: 0.3; cursor: not-allowed; }
+
+.calendar-footer {
+  margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--glass-border);
+  display: flex; justify-content: center;
+}
+.today-btn {
+  background: transparent; border: none; color: var(--primary); font-size: 0.8rem;
+  font-weight: 600; cursor: pointer; padding: 2px 10px;
+}
+
+.clear-icon-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%;
+  color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.05);
+}
+.clear-icon-btn:hover { background: rgba(255, 60, 60, 0.2); color: #ff4d4d; }
+
+/* TIME PICKER STYLES */
+.time-popup {
+  width: 100%;
+  height: 200px;
+  padding: 0;
+  display: flex !important; 
+  flex-direction: row !important;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.time-column {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding-bottom: 40px;
+  scrollbar-width: none;
+}
+.time-column::-webkit-scrollbar { display: none; }
+
+.col-label {
+  font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted);
+  position: sticky; top: 0; background: var(--glass-dropdown);
+  width: 100%; text-align: center; padding: 6px 0; z-index: 2;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.time-cell {
+  width: 70%; padding: 6px 0; margin: 1px 0; text-align: center;
+  background: transparent; border: none; border-radius: 6px;
+  color: var(--text-main); cursor: pointer; font-size: 0.9rem; flex-shrink: 0;
+}
+.time-cell:hover { background: rgba(255, 255, 255, 0.1); }
+.time-cell.selected { background: var(--primary); color: white; font-weight: 700; }
+
+.time-divider {
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: var(--text-muted); padding-top: 25px;
+}
+
+/* =========================================
+   AI ELEMENTS
+   ========================================= */
+
+/* AI Rewrite Button */
+.ai-magic-btn {
+  position: absolute; bottom: 12px; right: 12px;
+  background: var(--glass-surface); border: 1px solid var(--primary); color: var(--primary);
+  padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+  display: flex; align-items: center; gap: 6px; z-index: 10;
+  backdrop-filter: blur(4px); transition: all 0.2s ease;
+}
+.ai-magic-btn:hover:not(:disabled) { background: var(--primary); color: white; transform: translateY(-2px); }
+.ai-magic-btn:disabled { border-color: var(--text-muted); color: var(--text-muted); cursor: default; }
+
+.comparison-box { background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 12px; padding: 1rem; margin-top: 0.5rem; font-size: 0.95rem; font-style: italic; color: var(--text-muted); }
+.suggestion-box { background: var(--input-bg); border: 1px solid var(--primary); border-radius: 12px; padding: 1.25rem; margin-top: 0.5rem; color: var(--text-main); position: relative; overflow: hidden; }
+.suggestion-box::after { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--primary), transparent); opacity: 0.5; }
+
+/* AI Grammar Button */
+.ai-fix-btn {
+  background: rgba(0, 0, 0, 0.4); 
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--primary); color: #ffffff;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 50px;
+  cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); 
+}
+.ai-fix-btn:hover:not(:disabled) {
+  background: var(--primary); border-color: var(--primary); color: white;
+  transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4); 
+}
+.ai-fix-btn:disabled {
+  opacity: 0.5; cursor: wait; background: rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.5);
+  box-shadow: none;
+}
+.relative-wrapper { position: relative; width: 100%; }
+.ai-floating-wrapper { position: absolute; bottom: 30px; right: 12px; z-index: 20; }
+.textarea-with-btn { padding-bottom: 45px !important; }
+
+/* Clock Display */
+.clock-display { text-align: center; padding: 20px; background: var(--input-bg); border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--glass-border); }
+.clock-label { font-size: 0.8em; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+.clock-time { font-size: 2.5em; font-weight: bold; line-height: 1; }
+
+/* Splash Screen */
+.splash-screen {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s;
+}
+.splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+/* --- GLOBAL TOAST STACK --- */
+.toast-stack-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000; /* Above everything */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none; /* Let clicks pass through empty space */
+}
+
+.glass-toast {
+  pointer-events: all; /* Re-enable clicks on the toast itself */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 12px 16px;
+  border-radius: 12px;
+  min-width: 300px;
+  max-width: 400px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: all 0.3s ease;
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  .glass-toast {
+    background: rgba(30, 41, 59, 0.85);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+}
+
+/* Toast Variants */
+.toast-success { border-left: 4px solid #10b981; }
+.toast-danger  { border-left: 4px solid #ef4444; }
+.toast-warning { border-left: 4px solid #f59e0b; }
+.toast-info    { border-left: 4px solid #3b82f6; }
+
+.toast-content strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+.toast-content p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+  padding: 0;
+  margin-left: auto;
+  color: inherit;
+}
+.toast-close:hover { opacity: 1; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
